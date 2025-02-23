@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <title>INST377-Lab4</title>
+    <style>
+      body {
+        background-color: lightblue;
+        color: black;
+      }
+      #content-container {
+        height: 700 px;
+      }
+      #container-style {
+        display: flex;
+        width: 90%;
+        height: 35%;
+        padding: 5px;
+      }
+      .section-style {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        height: 40%;
+        background-color: purple;
+        border-radius: 5px;
+        color: black;
+        padding: 5px;
+        border: 3px solid white;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <h1 id="title"><strong>INST377 - Lab 4</strong></h1>
+    <div id="content-container">
+      <div id="container-style">
+        <div class="section-style">
+          <form>
+            <label>Name:</label>
+            <input id="name-input" type="text" required />
+            <input onclick="alertMe()" type="submit" value="Alert Me!" />
+          </form>
+        </div>
+        <div class="section-style">
+          <button onclick="color()">Change Color</button>
+        </div>
+      </div>
+      <div id="container-style">
+        <div class="section-style">
+          <form>
+            <label>Text Tester:</label>
+            <input id="text-input" type="text" required />
+            <input
+              id="validate-button"
+              onclick="validateText()"
+              type="submit"
+              value="Validate Text!"
+            />
+          </form>
+        </div>
+        <div class="section-style">
+          <button onclick="addText()">Add Text</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function alertMe() {
+        var name = document.getElementById("name-input").value;
+        if (name.trim() != "") {
+          //removes whitespace and checks for empty input
+          alert("Hi " + name + "!");
+        } else {
+          return true;
+        }
+      }
+      function color() {
+        var body = document.getElementById("body");
+        //console.log('Current color:',body.style.backgroundColor) for debugging
+        if (
+          body.style.backgroundColor == "lightblue" ||
+          body.style.backgroundColor == ""
+        ) {
+          body.style.backgroundColor = "aqua";
+        } else {
+          body.style.backgroundColor = "lightblue";
+        }
+      }
+      function validateText() {
+        var text = document.getElementById("text-input").value.trim();
+        var validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+        if (validation.test(text)) {
+          alert("Invalid, there are special characters detected.");
+        }
+      }
+      let flag = false; //boolean var to make addText only executable once
+      function addText() {
+        if (!flag) {
+          //checks flag so function is only able to be executed once
+          var toAdd = document.getElementById("title");
+          toAdd.innerText += " Add Text";
+          flag = true;
+        }
+      }
+    </script>
+  </body>
+</html>
